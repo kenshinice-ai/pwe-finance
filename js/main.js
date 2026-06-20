@@ -111,9 +111,13 @@
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
       var isValid = true;
+      var submitBtn = contactForm.querySelector('button[type="submit"]');
+      var statusBox = document.getElementById('contactFormStatus');
+      var originalText = submitBtn ? submitBtn.innerHTML : '';
 
       this.querySelectorAll('.error-msg').forEach(function (msg) { msg.textContent = ''; });
       this.querySelectorAll('input, textarea').forEach(function (field) { field.classList.remove('error'); });
+      setFormStatus(statusBox, '', '');
 
       // First Name
       var firstName = document.getElementById('firstName');
@@ -142,28 +146,70 @@
       if (!message.value.trim()) { showError(message, 'Message is required'); isValid = false; }
       else if (message.value.trim().length < 10) { showError(message, 'Please enter at least 10 characters'); isValid = false; }
 
-      if (isValid) {
-        var submitBtn = contactForm.querySelector('button[type="submit"]');
-        var originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Enquiry Sent!';
-        submitBtn.disabled = true;
-        submitBtn.style.background = '#27ae60';
-        submitBtn.style.borderColor = '#27ae60';
-
-        setTimeout(function () {
-          contactForm.reset();
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-          submitBtn.style.background = '';
-          submitBtn.style.borderColor = '';
-        }, 3000);
+      if (!isValid) {
+        setFormStatus(statusBox, 'Please fix the highlighted fields before submitting.', 'error');
+        return;
       }
+
+      submitContactForm(contactForm, submitBtn, originalText, statusBox);
     });
 
     function showError(field, message) {
       field.classList.add('error');
       var errorSpan = field.parentElement.querySelector('.error-msg');
       if (errorSpan) errorSpan.textContent = message;
+    }
+
+    /**
+     * Sends the validated static-site enquiry to the configured Formspree form.
+     * Failures are shown to the user so the form never silently pretends to send.
+     */
+    function submitContactForm(form, submitBtn, originalText, statusBox) {
+      var endpoint = form.getAttribute('action');
+      if (!endpoint || endpoint.indexOf('formspree.io/f/') === -1) {
+        setFormStatus(statusBox, 'This form is not configured yet. Please call or email us instead.', 'error');
+        return;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      }
+      setFormStatus(statusBox, 'Sending your enquiry...', 'info');
+
+      fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('Formspree returned ' + response.status);
+          }
+
+          form.reset();
+          setFormStatus(statusBox, 'Thanks, your enquiry has been sent. We will be in touch soon.', 'success');
+          if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Enquiry Sent';
+            setTimeout(function () {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalText;
+            }, 4000);
+          }
+        })
+        .catch(function () {
+          setFormStatus(statusBox, 'Sorry, your enquiry could not be sent. Please try again, call us, or email info@pwefinance.com.au.', 'error');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+          }
+        });
+    }
+
+    function setFormStatus(statusBox, message, type) {
+      if (!statusBox) return;
+      statusBox.textContent = message;
+      statusBox.className = type ? 'form-status ' + type : 'form-status';
     }
   }
 

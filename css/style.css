@@ -735,6 +735,37 @@ img { max-width: 100%; display: block; }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--light); box-shadow: 0 0 0 3px rgba(0,170,229,0.15); }
 .form-group input.error, .form-group textarea.error { border-color: #e74c3c; }
 .error-msg { display: block; font-size: 0.8rem; color: #e74c3c; margin-top: 4px; min-height: 18px; }
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+.form-status {
+  display: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 2px 0 16px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.form-status.info,
+.form-status.success,
+.form-status.error {
+  display: block;
+}
+.form-status.info {
+  background: rgba(0,170,229,0.1);
+  color: #075b78;
+}
+.form-status.success {
+  background: rgba(39,174,96,0.12);
+  color: #17643b;
+}
+.form-status.error {
+  background: rgba(231,76,60,0.1);
+  color: #a93226;
+}
 .form-note { text-align: center; font-size: 0.8rem; color: #999; margin-top: 16px; }
 .form-note a { color: var(--light); text-decoration: underline; }
 

@@ -96,7 +96,9 @@
     </div>
 
     <div class="contact-form-wrapper">
-      <form id="contactForm" class="contact-form" novalidate>
+      <form id="contactForm" class="contact-form" action="https://formspree.io/f/xpqevgrd" method="POST" novalidate>
+        <input type="hidden" name="_subject" value="New PWE Finance website enquiry">
+        <input type="text" name="_gotcha" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">First Name *</label>
@@ -145,6 +147,7 @@
           <span class="error-msg"></span>
         </div>
 
+        <div class="form-status" id="contactFormStatus" role="status" aria-live="polite"></div>
         <button type="submit" class="btn btn-secondary btn-full"><i class="fa-solid fa-paper-plane"></i> Submit Enquiry</button>
         <p class="form-note">By submitting this form, you agree to our <a href="privacy-policy.html">Privacy Policy</a>.</p>
       </form>
