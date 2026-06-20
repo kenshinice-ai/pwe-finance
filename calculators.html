@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Calculators | PWE Finance — Repayment & Borrowing Capacity</title>
+  <meta name="description" content="Free loan calculators: mortgage repayment calculator and borrowing capacity estimator. Compare rates and plan your finance with PWE Finance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="icons/site.webmanifest">
+  <meta name="theme-color" content="#222159">
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo" aria-label="PWE Finance Home">
+      <span class="logo-main">PWE</span>
+      <span class="logo-sub">FINANCE</span>
+    </a>
+
+    <nav class="nav" id="mainNav" aria-label="Main navigation">
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+
+        <!-- Home Loans Dropdown -->
+        <li class="nav-item dropdown-parent">
+          <a href="#" class="nav-dropdown-btn" aria-haspopup="true">
+            Home Loans <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu" role="menu">
+            <a href="first-home-loans.html" role="menuitem"><i class="fa-solid fa-house-chimney"></i> First Home Loans</a>
+            <a href="next-home-loans.html" role="menuitem"><i class="fa-solid fa-arrow-right-arrow-left"></i> Next Home Loans</a>
+            <a href="investment-loans.html" role="menuitem"><i class="fa-solid fa-chart-line"></i> Investment Loans</a>
+            <a href="refinancing.html" role="menuitem"><i class="fa-solid fa-rotate"></i> Refinancing</a>
+          </div>
+        </li>
+
+        <!-- Other Loans Dropdown -->
+        <li class="nav-item dropdown-parent">
+          <a href="#" class="nav-dropdown-btn" aria-haspopup="true">
+            Other Loans <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown-menu" role="menu">
+            <a href="commercial-business-loans.html" role="menuitem"><i class="fa-solid fa-building"></i> Commercial & Business</a>
+            <a href="construction-loans.html" role="menuitem"><i class="fa-solid fa-hard-hat"></i> Construction Loans</a>
+            <a href="smsf-loans.html" role="menuitem"><i class="fa-solid fa-piggy-bank"></i> SMSF Loans</a>
+          </div>
+        </li>
+
+        <li class="nav-item active"><a href="calculators.html">Calculators</a></li>
+        <li class="nav-item"><a href="about.html">About</a></li>
+        <li class="nav-item"><a href="blog.html">Blog</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta-mobile nav-cta">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="tel:04XX XXX XXX" class="header-phone"><i class="fa-solid fa-phone"></i> 04XX XXX XXX</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="container page-hero-content">
+    <h1>Loan Calculators</h1>
+    <p>Repayment, offset and borrowing capacity in one clean view.</p>
+  </div>
+</section>
+
+<section class="breadcrumb-section">
+  <div class="container"><div class="breadcrumb-inner">
+    <a href="index.html">Home</a><span class="breadcrumb-sep">/</span><span class="breadcrumb-current">Calculators</span>
+  </div></div>
+</section>
+
+
+
+<section class="calculators-section">
+  <div class="container">
+    <div class="lee-calculator-app">
+  <style>
+.calculators-section {
+  padding: 72px 0;
+  background: #fff;
+}
+
+.lee-calculator-app {
+  --calc-bg: #f6f7f2;
+  --calc-panel: #ffffff;
+  --calc-ink: #1f2933;
+  --calc-muted: #667085;
+  --calc-line: #dde3dc;
+  --calc-blue: #2563eb;
+  --calc-blue-soft: #e8f0ff;
+  --calc-green: #0f9f6e;
+  --calc-green-soft: #e7f7ef;
+  --calc-red: #d92d20;
+  --calc-red-soft: #fff1f0;
+  --calc-amber-soft: #fff3dd;
+  --calc-shadow: 0 18px 45px rgba(34, 33, 89, 0.12);
+  color: var(--calc-ink);
+  font-family: var(--font-main);
+}
+
+.lee-calculator-app *,
+.lee-calculator-app *::before,
+.lee-calculator-app *::after {
+  box-sizing: border-box;
+}
+
+.lee-calculator-app button,
+.lee-calculator-app input,
+.lee-calculator-app select {
+  font: inherit;
+}
+
+.lee-calculator-app button {
+  cursor: pointer;
+  border: 0;
+}
+
+.lee-calculator-app .calc-app {
+  width: min(100%, 980px);
+  margin: 0 auto;
+  background: #fbfcf9;
+  border: 1px solid rgba(34, 33, 89, 0.08);
+  box-shadow: var(--calc-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+
+.lee-calculator-app .calc-header {
+  background: var(--calc-panel);
+  padding: 28px 30px 24px;
+  border-bottom: 1px solid var(--calc-line);
+}
+
+.lee-calculator-app .title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: 0;
+}
+
+.lee-calculator-app .title-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.lee-calculator-app .calc-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.lee-calculator-app .calc-title {
+  margin: 0;
+  color: var(--dark);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.lee-calculator-app .subtle {
+  margin: 8px 0 0;
+  color: var(--calc-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.lee-calculator-app .badge {
+  white-space: nowrap;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 8px 10px;
+  min-width: 72px;
+  background: var(--calc-blue-soft);
+  color: var(--calc-blue);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app .lang-btn {
+  width: 52px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 1px solid var(--calc-line);
+  background: var(--calc-panel);
+  color: var(--calc-ink);
+  font-size: 0.78rem;
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.lee-calculator-app .calc-content {
+  padding: 24px;
+}
+
+.lee-calculator-app .tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px;
+  background: #edf1eb;
+  border: 1px solid var(--calc-line);
+  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app .tab {
+  min-height: 44px;
+  color: var(--calc-muted);
+  background: transparent;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.lee-calculator-app .tab.active {
+  background: var(--calc-panel);
+  color: var(--calc-blue);
+  box-shadow: 0 4px 14px rgba(31, 41, 51, 0.08);
+}
+
+.lee-calculator-app .calc-card {
+  background: var(--calc-panel);
+  border: 1px solid var(--calc-line);
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app .result {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb, #0f9f6e);
+  border: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 170px;
+}
+
+.lee-calculator-app .result.capacity {
+  background: linear-gradient(135deg, #5b5bd6, #0b7f69);
+}
+
+.lee-calculator-app .result.compare {
+  background: linear-gradient(135deg, #0f9f6e, #117f8f);
+}
+
+.lee-calculator-app .result.compare-cost {
+  background: linear-gradient(135deg, #d92d20, #8a3b12);
+}
+
+.lee-calculator-app .result::after {
+  content: "";
+  position: absolute;
+  right: -44px;
+  top: -44px;
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.lee-calculator-app .result > * {
+  position: relative;
+  z-index: 1;
+}
+
+.lee-calculator-app .label {
+  display: block;
+  margin: 0 0 7px;
+  color: var(--calc-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+  min-height: 16px;
+}
+
+.lee-calculator-app .result .label {
+  color: rgba(255, 255, 255, 0.76);
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.lee-calculator-app .hero-value {
+  margin: 0;
+  font-size: clamp(2.2rem, 7vw, 3rem);
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.lee-calculator-app .hero-meta {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.lee-calculator-app .mini {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app .mini span {
+  display: block;
+  font-size: 0.72rem;
+  opacity: 0.72;
+  margin-bottom: 3px;
+}
+
+.lee-calculator-app .mini strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.lee-calculator-app .grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 4px;
+}
+
+.lee-calculator-app .field {
+  margin-bottom: 16px;
+}
+
+.lee-calculator-app .field:last-child {
+  margin-bottom: 0;
+}
+
+.lee-calculator-app .input-wrap {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  align-items: center;
+  border: 1px solid var(--calc-line);
+  background: #f8faf7;
+  min-height: 48px;
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app .input-wrap:focus-within {
+  border-color: var(--calc-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.lee-calculator-app .prefix {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--calc-muted);
+  font-weight: 900;
+}
+
+.lee-calculator-app input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  padding: 12px 12px 12px 0;
+  color: var(--calc-ink);
+  font-weight: 800;
+}
+
+.lee-calculator-app input[type=number]::-webkit-inner-spin-button,
+.lee-calculator-app input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.lee-calculator-app .switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+  background: #edf1eb;
+  border: 1px solid var(--calc-line);
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app .switch button {
+  min-height: 38px;
+  background: transparent;
+  color: var(--calc-muted);
+  font-weight: 900;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.lee-calculator-app .switch button.active {
+  background: var(--calc-panel);
+  color: var(--calc-blue);
+  box-shadow: 0 4px 12px rgba(31, 41, 51, 0.08);
+}
+
+.lee-calculator-app .compare-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.lee-calculator-app .small-btn {
+  min-width: 86px;
+  min-height: 32px;
+  padding: 0 10px;
+  background: var(--calc-green-soft);
+  color: var(--calc-green);
+  font-size: 0.78rem;
+  font-weight: 900;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.lee-calculator-app .small-btn.off {
+  background: #edf1eb;
+  color: var(--calc-muted);
+}
+
+.lee-calculator-app .small-btn.danger {
+  background: var(--calc-red-soft);
+  color: var(--calc-red);
+}
+
+.lee-calculator-app .small-btn.success {
+  background: var(--calc-green-soft);
+  color: var(--calc-green);
+}
+
+.lee-calculator-app .hidden {
+  display: none !important;
+}
+
+.lee-calculator-app .summary {
+  display: grid;
+  grid-template-columns: 104px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.lee-calculator-app .donut {
+  width: 104px;
+  height: 104px;
+  border-radius: 999px;
+  background: conic-gradient(var(--calc-blue) 0deg, var(--calc-blue) var(--interest-angle), var(--calc-green) var(--interest-angle), var(--calc-green) 360deg);
+  display: grid;
+  place-items: center;
+}
+
+.lee-calculator-app .donut-inner {
+  width: 66px;
+  height: 66px;
+  border-radius: 999px;
+  background: var(--calc-panel);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--calc-muted);
+  font-size: 0.65rem;
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.lee-calculator-app .rows {
+  display: grid;
+  gap: 10px;
+}
+
+.lee-calculator-app .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--calc-line);
+  color: var(--calc-muted);
+  font-size: 0.84rem;
+}
+
+.lee-calculator-app .row:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.lee-calculator-app .row strong {
+  color: var(--calc-ink);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.lee-calculator-app .row span {
+  min-width: 0;
+}
+
+.lee-calculator-app .section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.lee-calculator-app .section-head h2 {
+  margin: 0;
+  color: var(--dark);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.lee-calculator-app .chart {
+  width: 100%;
+  min-height: 180px;
+  background: #f8faf7;
+  border: 1px solid var(--calc-line);
+  display: block;
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app .projection-controls {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.lee-calculator-app .projection-controls button {
+  flex: 1;
+  min-height: 36px;
+  background: #edf1eb;
+  color: var(--calc-muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.lee-calculator-app .projection-controls button.active {
+  background: var(--calc-blue-soft);
+  color: var(--calc-blue);
+}
+
+.lee-calculator-app .table-wrap {
+  max-height: 330px;
+  overflow: auto;
+  border: 1px solid var(--calc-line);
+  background: #fff;
+  border-radius: var(--radius-sm);
+}
+
+.lee-calculator-app table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.72rem;
+}
+
+.lee-calculator-app th {
+  position: sticky;
+  top: 0;
+  background: #edf1eb;
+  color: var(--calc-muted);
+  text-align: left;
+  padding: 8px;
+}
+
+.lee-calculator-app td {
+  padding: 8px;
+  border-top: 1px solid var(--calc-line);
+  white-space: nowrap;
+}
+
+.lee-calculator-app td:last-child,
+.lee-calculator-app th:last-child {
+  text-align: right;
+}
+
+.lee-calculator-app .notice {
+  padding: 10px;
+  background: var(--calc-amber-soft);
+  color: #7c4b08;
+  border: 1px solid #f3d08f;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 768px) {
+  .calculators-section {
+    padding: 48px 0;
+  }
+
+  .lee-calculator-app .calc-header {
+    padding: 22px 18px 18px;
+  }
+
+  .lee-calculator-app .title-row,
+  .lee-calculator-app .calc-actions {
+    align-items: flex-start;
+  }
+
+  .lee-calculator-app .calc-content {
+    padding: 16px;
+  }
+
+  .lee-calculator-app .grid-2,
+  .lee-calculator-app .hero-meta,
+  .lee-calculator-app .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .lee-calculator-app .donut {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .lee-calculator-app .title-row {
+    flex-direction: column;
+  }
+
+  .lee-calculator-app .calc-actions {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .lee-calculator-app .badge {
+    flex: 1;
+  }
+}
+  </style>
+  <main class="calc-app">
+    <header class="calc-header">
+      <div class="title-row">
+        <div class="title-copy">
+          <h2 class="calc-title" data-i18n="appTitle">Lee's Loan Calculator</h2>
+          <p class="subtle" data-i18n="appSubtitle">Repayment, offset and borrowing capacity in one clean view.</p>
+        </div>
+        <div class="calc-actions">
+          <div class="badge" id="modeBadge">Repayment</div>
+          <button class="lang-btn" id="langToggle" type="button">中文</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="calc-content">
+      <nav class="tabs" aria-label="Calculator mode">
+        <button class="tab active" id="repaymentTab" type="button" data-i18n="repayment">Repayment</button>
+        <button class="tab" id="capacityTab" type="button" data-i18n="capacity">Capacity</button>
+      </nav>
+
+      <section id="repaymentView">
+        <div class="calc-card result" id="repaymentResult"></div>
+
+        <div class="calc-card">
+          <div class="field">
+            <label class="label" for="loanAmount" data-i18n="loanAmount">Loan Amount</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input id="loanAmount" type="number" min="0" step="1000" inputmode="decimal">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="offsetAmount" data-i18n="offsetBalance">Offset Account Balance</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input id="offsetAmount" type="number" min="0" step="1000" inputmode="decimal">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <div class="compare-toggle">
+                <label class="label" for="interestRate" style="margin:0;" data-i18n="interestRate">Interest Rate</label>
+                <button class="small-btn off" id="compareToggle" type="button">Compare</button>
+              </div>
+              <div class="input-wrap">
+                <span class="prefix">%</span>
+                <input id="interestRate" type="number" min="0" step="0.01" inputmode="decimal">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="loanTerm" data-i18n="loanTerm">Loan Term</label>
+              <div class="input-wrap">
+                <span class="prefix" id="loanTermPrefix">Y</span>
+                <input id="loanTerm" type="number" min="1" step="1" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+
+          <div class="field hidden" id="compareRateWrap">
+            <label class="label" for="compareRate" data-i18n="comparisonRate">Comparison Rate</label>
+            <div class="input-wrap">
+              <span class="prefix">%</span>
+              <input id="compareRate" type="number" min="0" step="0.01" inputmode="decimal">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" data-i18n="repaymentType">Repayment Type</label>
+            <div class="switch">
+              <button id="piButton" class="active" type="button">P &amp; I</button>
+              <button id="ioButton" type="button" data-i18n="interestOnly">Interest Only</button>
+            </div>
+          </div>
+
+          <div class="field hidden" id="ioPeriodWrap">
+            <label class="label" for="ioPeriod" data-i18n="ioPeriod">Interest Only Period</label>
+            <div class="input-wrap">
+              <span class="prefix" id="ioPeriodPrefix">Y</span>
+              <input id="ioPeriod" type="number" min="0" step="1" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <div class="section-head">
+            <h2 data-i18n="loanSummary">Loan Summary</h2>
+          </div>
+          <div class="summary">
+            <div class="donut" id="donut" style="--interest-angle:180deg;">
+              <div class="donut-inner" data-i18n-html="totalCost">Total<br>Cost</div>
+            </div>
+            <div class="rows" id="summaryRows"></div>
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <div class="section-head">
+            <h2 data-i18n="repaymentProjection">Repayment Projection</h2>
+            <button class="small-btn" id="projectionToggle" type="button">Show</button>
+          </div>
+          <div id="projectionBody" class="hidden">
+            <canvas class="chart" id="projectionCanvas" width="720" height="340"></canvas>
+            <div class="projection-controls">
+              <button id="chartButton" class="active" type="button" data-i18n="chart">Chart</button>
+              <button id="tableButton" type="button" data-i18n="schedule">Schedule</button>
+            </div>
+            <div class="table-wrap hidden" id="scheduleWrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th data-i18n="month">Month</th>
+                    <th data-i18n="principal">Principal</th>
+                    <th data-i18n="interest">Interest</th>
+                    <th data-i18n="balance">Balance</th>
+                  </tr>
+                </thead>
+                <tbody id="scheduleBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="capacityView" class="hidden">
+        <div class="calc-card result capacity" id="capacityResult"></div>
+
+        <div class="calc-card">
+          <div class="field">
+            <label class="label" for="income" data-i18n="annualIncome">Annual Income Before Tax</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input id="income" type="number" min="0" step="1000" inputmode="decimal">
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label class="label" data-i18n="applicants">Applicants</label>
+              <div class="switch">
+                <button id="singleButton" class="active" type="button" data-i18n="single">Single</button>
+                <button id="coupleButton" type="button" data-i18n="couple">Couple</button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="dependents" data-i18n="dependants">Dependants</label>
+              <div class="input-wrap">
+                <span class="prefix" id="dependentsPrefix">N</span>
+                <input id="dependents" type="number" min="0" step="1" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="otherDebts" data-i18n="otherMonthlyDebts">Other Monthly Debts</label>
+            <div class="input-wrap">
+              <span class="prefix">$</span>
+              <input id="otherDebts" type="number" min="0" step="100" inputmode="decimal">
+            </div>
+          </div>
+
+          <div class="notice" data-i18n="capacityNotice">
+            Estimate only. Uses a simplified APRA buffer, DTI and HEM-style expense model. Real lender policy can be materially different.
+          </div>
+        </div>
+
+        <div class="calc-card">
+          <div class="section-head">
+            <h2 data-i18n="capacityDetail">Capacity Detail</h2>
+          </div>
+          <div class="rows" id="capacityRows"></div>
+        </div>
+      </section>
+    </section>
+
+    </main>
+
+  <script>
+    const defaults = {
+      activeTab: "repayment",
+      loanAmount: 500000,
+      interestRate: 6,
+      loanTerm: 30,
+      repaymentType: "pi",
+      ioPeriod: 5,
+      offsetAmount: 0,
+      isCompareMode: false,
+      compareRate: 5.5,
+      income: 100000,
+      appType: "single",
+      dependents: 0,
+      otherDebts: 0,
+      showProjection: false,
+      projectionView: "chart",
+      language: "en"
+    };
+
+    const translations = {
+      en: {
+        pageTitle: "Lee's Loan Calculator",
+        appTitle: "Lee's Loan Calculator",
+        appSubtitle: "Repayment, offset and borrowing capacity in one clean view.",
+        langToggle: "中文",
+        repayment: "Repayment",
+        capacity: "Capacity",
+        loanAmount: "Loan Amount",
+        offsetBalance: "Offset Account Balance",
+        interestRate: "Interest Rate",
+        loanTerm: "Loan Term",
+        yearPrefix: "Y",
+        numberPrefix: "N",
+        comparisonRate: "Comparison Rate",
+        repaymentType: "Repayment Type",
+        interestOnly: "Interest Only",
+        ioPeriod: "Interest Only Period",
+        loanSummary: "Loan Summary",
+        totalCost: "Total<br>Cost",
+        repaymentProjection: "Repayment Projection",
+        show: "Show",
+        hide: "Hide",
+        chart: "Chart",
+        schedule: "Schedule",
+        month: "Month",
+        principal: "Principal",
+        interest: "Interest",
+        balance: "Balance",
+        annualIncome: "Annual Income Before Tax",
+        applicants: "Applicants",
+        single: "Single",
+        couple: "Couple",
+        dependants: "Dependants",
+        otherMonthlyDebts: "Other Monthly Debts",
+        capacityNotice: "Estimate only. Uses a simplified APRA buffer, DTI and HEM-style expense model. Real lender policy can be materially different.",
+        capacityDetail: "Capacity Detail",
+        footer: "Designed by Lee",
+        compare: "Compare",
+        active: "Close",
+        saving: "Saving",
+        extraCost: "Cost warning",
+        monthlyRepayment: "Monthly Repayment",
+        estimatedSaving: "Estimated Saving",
+        estimatedExtraCost: "Estimated Extra Cost",
+        perMonth: "/ mo",
+        currentRate: "Current",
+        compareRate: "Compare",
+        estimatedInterestSaving: "Estimated interest saving",
+        estimatedExtraInterest: "Estimated extra interest",
+        totalSavingOverTerm: "Total saving over loan term",
+        totalExtraPayableOverTerm: "Total extra payable over loan term",
+        principalFirstMonth: "Principal first month",
+        interestFirstMonth: "Interest first month",
+        ioNote: "Interest only period. Reverts to about {amount} per month.",
+        totalInterest: "Total Interest",
+        totalPayable: "Total Payable",
+        compareTotalSaving: "Compare Total Saving",
+        compareTotalExtra: "Compare Total Extra",
+        compareInterestSaving: "Compare Interest Saving",
+        compareExtraInterest: "Compare Extra Interest",
+        estimatedBorrowingPower: "Estimated Borrowing Power",
+        assessmentRate: "Assessment rate",
+        monthlySurplus: "Monthly surplus",
+        netMonthlyIncome: "Net Monthly Income",
+        estimatedLivingExpenses: "Estimated Living Expenses",
+        dtiLimit: "DTI Limit",
+        serviceabilityLimit: "Serviceability Limit",
+        start: "Start",
+        endYears: "End ({years}y)"
+      },
+      zh: {
+        pageTitle: "Lee的房贷计算器",
+        appTitle: "Lee的房贷计算器",
+        appSubtitle: "在一个清晰的界面中直观掌控还款、对冲与贷款额度。",
+        langToggle: "EN",
+        repayment: "还款计算",
+        capacity: "贷款额度",
+        loanAmount: "贷款金额",
+        offsetBalance: "对冲账户余额",
+        interestRate: "利率",
+        loanTerm: "贷款期限",
+        yearPrefix: "年",
+        numberPrefix: "人",
+        comparisonRate: "对比利率",
+        repaymentType: "还款方式",
+        interestOnly: "仅还利息 (IO)",
+        ioPeriod: "仅还息期",
+        loanSummary: "贷款摘要",
+        totalCost: "总<br>成本",
+        repaymentProjection: "还款预测",
+        show: "显示",
+        hide: "隐藏",
+        chart: "图表",
+        schedule: "明细",
+        month: "月份",
+        principal: "本金",
+        interest: "利息",
+        balance: "余额",
+        annualIncome: "税前年收入",
+        applicants: "申请人",
+        single: "单人",
+        couple: "双人",
+        dependants: "受抚养人数",
+        otherMonthlyDebts: "其他月度负债",
+        capacityNotice: "仅供参考。基于简化的 APRA 缓冲率、DTI 及类 HEM 支出模型估算。实际贷款机构的政策可能存在实质性差异。",
+        capacityDetail: "额度评估详情",
+        footer: "由 Lee 设计与开发",
+        compare: "对比",
+        active: "关闭对比",
+        saving: "省钱模式",
+        extraCost: "成本预警",
+        monthlyRepayment: "每月还款金额",
+        estimatedSaving: "预计每月节省",
+        estimatedExtraCost: "预计额外月供成本",
+        perMonth: "/ 月",
+        currentRate: "当前",
+        compareRate: "对比",
+        estimatedInterestSaving: "预计节省总利息",
+        estimatedExtraInterest: "预计额外总利息",
+        totalSavingOverTerm: "贷款期内总计节省",
+        totalExtraPayableOverTerm: "贷款期内额外还款总计",
+        principalFirstMonth: "首月偿还本金",
+        interestFirstMonth: "首月偿还利息",
+        ioNote: "只还利息期结束后，预计每月还款约为 {amount}。",
+        totalInterest: "总利息",
+        totalPayable: "总还款额",
+        compareTotalSaving: "总计节省金额",
+        compareTotalExtra: "总计额外支出",
+        compareInterestSaving: "利息节省金额",
+        compareExtraInterest: "额外利息支出",
+        estimatedBorrowingPower: "预计借款能力上限",
+        assessmentRate: "银行评估利率",
+        monthlySurplus: "每月税后结余",
+        netMonthlyIncome: "每月净收入估算",
+        estimatedLivingExpenses: "预计最低生活支出",
+        dtiLimit: "DTI (债务收入比) 限制",
+        serviceabilityLimit: "还款能力 (Serviceability) 限制",
+        start: "开始",
+        endYears: "结束（{years}年）"
+      }
+    };
+
+    const state = loadState();
+
+    const el = {};
+    [
+      "modeBadge", "langToggle", "repaymentTab", "capacityTab", "repaymentView", "capacityView",
+      "repaymentResult", "loanAmount", "offsetAmount", "interestRate", "loanTerm",
+      "compareToggle", "compareRateWrap", "compareRate", "piButton", "ioButton",
+      "ioPeriodWrap", "ioPeriod", "loanTermPrefix", "ioPeriodPrefix", "donut", "summaryRows", "projectionToggle",
+      "projectionBody", "projectionCanvas", "chartButton", "tableButton",
+      "scheduleWrap", "scheduleBody", "capacityResult", "income", "singleButton",
+      "coupleButton", "dependents", "dependentsPrefix", "otherDebts", "capacityRows"
+    ].forEach((id) => {
+      el[id] = document.getElementById(id);
+    });
+
+    function t(key, values = {}) {
+      const dictionary = translations[state.language] || translations.en;
+      const template = dictionary[key] || translations.en[key] || key;
+      return Object.keys(values).reduce((text, name) => text.replace(`{${name}}`, values[name]), template);
+    }
+
+    function renderStaticText() {
+      document.documentElement.lang = state.language === "zh" ? "zh-Hans" : "en";
+      // Keep the page SEO title stable; language toggle only updates the calculator UI.
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        node.textContent = t(node.dataset.i18n);
+      });
+      document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+        node.innerHTML = t(node.dataset.i18nHtml);
+      });
+      el.langToggle.textContent = t("langToggle");
+      el.loanTermPrefix.textContent = t("yearPrefix");
+      el.ioPeriodPrefix.textContent = t("yearPrefix");
+      el.dependentsPrefix.textContent = t("numberPrefix");
+    }
+
+    function loadState() {
+      try {
+        return { ...defaults, ...JSON.parse(localStorage.getItem("lee_calc_standalone") || "{}") };
+      } catch (error) {
+        return { ...defaults };
+      }
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem("lee_calc_standalone", JSON.stringify(state));
+      } catch (error) {
+        console.warn("Could not save calculator state.", error);
+      }
+    }
+
+    function numberValue(id) {
+      const value = parseFloat(el[id].value);
+      return Number.isFinite(value) ? value : 0;
+    }
+
+    function money(value, decimals = 0) {
+      return new Intl.NumberFormat("en-AU", {
+        style: "currency",
+        currency: "AUD",
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      }).format(Number.isFinite(value) ? value : 0);
+    }
+
+    function percent(part, total) {
+      if (!total || total <= 0) return "0.0%";
+      return `${((part / total) * 100).toFixed(1)}%`;
+    }
+
+    function calculateNetIncome(grossAnnual) {
+      let tax = 0;
+      if (grossAnnual > 190000) tax = 51638 + (grossAnnual - 190000) * 0.45;
+      else if (grossAnnual > 135000) tax = 29688 + (grossAnnual - 135000) * 0.37;
+      else if (grossAnnual > 45000) tax = 5092 + (grossAnnual - 45000) * 0.30;
+      else if (grossAnnual > 18200) tax = (grossAnnual - 18200) * 0.16;
+      const medicare = grossAnnual * 0.02;
+      return (grossAnnual - tax - medicare) / 12;
+    }
+
+    function estimatedExpenses(type, dependents) {
+      const base = type === "couple" ? 2800 : 1600;
+      return base + dependents * 400;
+    }
+
+    function computeScenario(ratePercent) {
+      const principal = Number(state.loanAmount) || 0;
+      const offset = Math.max(0, Number(state.offsetAmount) || 0);
+      const rate = (Number(ratePercent) || 0) / 100 / 12;
+      const totalMonths = (Number(state.loanTerm) || 0) * 12;
+
+      if (principal <= 0 || rate <= 0 || totalMonths <= 0) return null;
+
+      let monthlyPayment = 0;
+      let monthlyPaymentAfterIO = 0;
+      let totalInterest = 0;
+      let totalPayable = 0;
+      let initialPrincipalPart = 0;
+      let initialInterestPart = 0;
+      const schedule = [];
+      let balance = principal;
+
+      if (state.repaymentType === "pi") {
+        monthlyPayment = principal * (rate * Math.pow(1 + rate, totalMonths)) / (Math.pow(1 + rate, totalMonths) - 1);
+        initialInterestPart = Math.max(0, (balance - offset) * rate);
+        initialPrincipalPart = monthlyPayment - initialInterestPart;
+
+        for (let month = 1; month <= totalMonths; month += 1) {
+          if (balance <= 0.01) break;
+          const currentInterest = Math.max(0, (balance - offset) * rate);
+          let currentPrincipal = monthlyPayment - currentInterest;
+          if (currentPrincipal > balance) currentPrincipal = balance;
+          balance -= currentPrincipal;
+          totalInterest += currentInterest;
+          schedule.push({ month, interest: currentInterest, principal: currentPrincipal, balance });
+        }
+      } else {
+        const ioMonths = (Number(state.ioPeriod) || 0) * 12;
+        const piMonths = totalMonths - ioMonths;
+        const ioPayment = Math.max(0, (principal - offset) * rate);
+        monthlyPayment = ioPayment;
+        initialInterestPart = ioPayment;
+        initialPrincipalPart = 0;
+        if (piMonths > 0) {
+          monthlyPaymentAfterIO = principal * (rate * Math.pow(1 + rate, piMonths)) / (Math.pow(1 + rate, piMonths) - 1);
+        }
+
+        for (let month = 1; month <= totalMonths; month += 1) {
+          let interest = Math.max(0, (balance - offset) * rate);
+          let principalPart = 0;
+          if (month > ioMonths) {
+            principalPart = monthlyPaymentAfterIO - interest;
+            if (balance - principalPart < 0) principalPart = balance;
+            balance -= principalPart;
+          }
+          totalInterest += interest;
+          schedule.push({ month, interest, principal: principalPart, balance });
+          if (balance <= 0.01 && month > ioMonths) break;
+        }
+      }
+
+      totalPayable = principal + totalInterest;
+
+      return {
+        monthlyPayment,
+        monthlyPaymentAfterIO,
+        totalInterest,
+        totalPayable,
+        principalPart: initialPrincipalPart,
+        interestPart: initialInterestPart,
+        schedule,
+        maxPayment: Math.max(monthlyPayment, monthlyPaymentAfterIO || 0)
+      };
+    }
+
+    function calculateCapacity() {
+      const grossAnnual = Number(state.income) || 0;
+      const debts = Number(state.otherDebts) || 0;
+      const dependants = parseInt(state.dependents, 10) || 0;
+      const assessmentRate = ((Number(state.interestRate) || 0) + 3) / 100 / 12;
+
+      if (grossAnnual <= 0) {
+        return null;
+      }
+
+      const dtiLimit = Math.max(0, grossAnnual * 6 - debts * 12 * 6);
+      const netMonthly = calculateNetIncome(grossAnnual);
+      const lifestyleBuffer = grossAnnual > 50000 ? (grossAnnual - 50000) * 0.01 : 0;
+      const expenses = estimatedExpenses(state.appType, dependants) + lifestyleBuffer / 12;
+      const surplus = netMonthly - expenses - debts;
+      const termMonths = 30 * 12;
+      let serviceabilityLimit = 0;
+
+      if (surplus > 0 && assessmentRate > 0) {
+        serviceabilityLimit = surplus * (Math.pow(1 + assessmentRate, termMonths) - 1) / (assessmentRate * Math.pow(1 + assessmentRate, termMonths));
+      }
+
+      return {
+        maxLoan: Math.max(0, Math.min(dtiLimit, serviceabilityLimit)),
+        dtiLimit,
+        serviceabilityLimit,
+        netMonthly,
+        expenses,
+        surplus,
+        assessmentRateAnnual: (Number(state.interestRate) || 0) + 3
+      };
+    }
+
+    function setInputValues() {
+      el.loanAmount.value = state.loanAmount;
+      el.offsetAmount.value = state.offsetAmount;
+      el.interestRate.value = state.interestRate;
+      el.loanTerm.value = state.loanTerm;
+      el.compareRate.value = state.compareRate;
+      el.ioPeriod.value = state.ioPeriod;
+      el.income.value = state.income;
+      el.dependents.value = state.dependents;
+      el.otherDebts.value = state.otherDebts;
+    }
+
+    function setActiveTab(tabName) {
+      state.activeTab = tabName;
+      el.repaymentTab.classList.toggle("active", tabName === "repayment");
+      el.capacityTab.classList.toggle("active", tabName === "capacity");
+      el.repaymentView.classList.toggle("hidden", tabName !== "repayment");
+      el.capacityView.classList.toggle("hidden", tabName !== "capacity");
+      el.modeBadge.textContent = tabName === "repayment" ? t("repayment") : t("capacity");
+      saveAndRender();
+    }
+
+    function renderRepayment() {
+      el.compareToggle.classList.toggle("off", !state.isCompareMode);
+      el.compareToggle.classList.toggle("success", false);
+      el.compareToggle.classList.toggle("danger", false);
+      el.compareToggle.textContent = state.isCompareMode ? t("active") : t("compare");
+      el.compareRateWrap.classList.toggle("hidden", !state.isCompareMode);
+      el.piButton.classList.toggle("active", state.repaymentType === "pi");
+      el.ioButton.classList.toggle("active", state.repaymentType === "io");
+      el.ioPeriodWrap.classList.toggle("hidden", state.repaymentType !== "io");
+
+      const result = computeScenario(state.interestRate);
+
+      if (!result) {
+        el.repaymentResult.innerHTML = `<p class="label">${t("monthlyRepayment")}</p><p class="hero-value">${money(0, 2)}</p>`;
+        el.summaryRows.innerHTML = "";
+        el.scheduleBody.innerHTML = "";
+        return;
+      }
+
+      const compare = state.isCompareMode ? computeScenario(state.compareRate) : null;
+      el.repaymentResult.classList.toggle("compare", false);
+      el.repaymentResult.classList.toggle("compare-cost", false);
+
+      if (compare) {
+        const monthlyDelta = result.monthlyPayment - compare.monthlyPayment;
+        const interestDelta = result.totalInterest - compare.totalInterest;
+        const totalDelta = result.totalPayable - compare.totalPayable;
+        const isSaving = monthlyDelta >= 0;
+        const heroLabel = isSaving ? t("estimatedSaving") : t("estimatedExtraCost");
+        const heroValue = Math.abs(monthlyDelta);
+        const interestLine = isSaving
+          ? `${t("estimatedInterestSaving")}: ${money(Math.max(0, interestDelta))}`
+          : `${t("estimatedExtraInterest")}: ${money(Math.abs(Math.min(0, interestDelta)))}`;
+        const totalLine = isSaving
+          ? `${t("totalSavingOverTerm")}: ${money(Math.max(0, totalDelta))}`
+          : `${t("totalExtraPayableOverTerm")}: ${money(Math.abs(Math.min(0, totalDelta)))}`;
+        el.compareToggle.classList.toggle("success", isSaving);
+        el.compareToggle.classList.toggle("danger", !isSaving);
+        el.compareToggle.textContent = isSaving ? t("saving") : t("extraCost");
+        el.repaymentResult.classList.toggle("compare", isSaving);
+        el.repaymentResult.classList.toggle("compare-cost", !isSaving);
+        el.repaymentResult.innerHTML = `
+          <p class="label">${heroLabel}</p>
+          <p class="hero-value">${money(heroValue, 2)} <span style="font-size:14px;font-weight:700;">${t("perMonth")}</span></p>
+          <div class="hero-meta">
+            <div class="mini"><span>${t("currentRate")} ${state.interestRate}%</span><strong>${money(result.monthlyPayment, 2)}</strong></div>
+            <div class="mini"><span>${t("compareRate")} ${state.compareRate}%</span><strong>${money(compare.monthlyPayment, 2)}</strong></div>
+          </div>
+          <p class="subtle" style="color:rgba(255,255,255,.76);margin-top:12px;">${interestLine}</p>
+          <p class="subtle" style="color:rgba(255,255,255,.76);margin-top:4px;">${totalLine}</p>
+        `;
+      } else {
+        const ioNote = state.repaymentType === "io"
+          ? `<p class="subtle" style="color:rgba(255,255,255,.78);margin-top:12px;">${t("ioNote", { amount: money(result.monthlyPaymentAfterIO, 2) })}</p>`
+          : "";
+        el.repaymentResult.innerHTML = `
+          <p class="label">${t("monthlyRepayment")}</p>
+          <p class="hero-value">${money(result.monthlyPayment, 2)}</p>
+          <div class="hero-meta">
+            <div class="mini"><span>${t("principalFirstMonth")}</span><strong>${money(result.principalPart, 2)} ${percent(result.principalPart, result.monthlyPayment)}</strong></div>
+            <div class="mini"><span>${t("interestFirstMonth")}</span><strong>${money(result.interestPart, 2)} ${percent(result.interestPart, result.monthlyPayment)}</strong></div>
+          </div>
+          ${ioNote}
+        `;
+      }
+
+      const total = (Number(state.loanAmount) || 0) + result.totalInterest;
+      const interestAngle = total > 0 ? Math.min(360, Math.max(0, result.totalInterest / total * 360)) : 180;
+      el.donut.style.setProperty("--interest-angle", `${interestAngle}deg`);
+      el.summaryRows.innerHTML = `
+        <div class="row"><span>${t("totalInterest")}</span><strong>${money(result.totalInterest)}</strong></div>
+        <div class="row"><span>${t("totalPayable")}</span><strong>${money(result.totalPayable)}</strong></div>
+        <div class="row"><span>${t("offsetBalance")}</span><strong>${money(state.offsetAmount)}</strong></div>
+      `;
+
+      if (compare) {
+        const compareTotalDelta = compare.totalPayable - result.totalPayable;
+        const compareInterestDelta = compare.totalInterest - result.totalInterest;
+        const deltaClass = compareTotalDelta <= 0 ? "color: var(--calc-green);" : "color: var(--calc-red);";
+        const totalLabel = compareTotalDelta <= 0 ? t("compareTotalSaving") : t("compareTotalExtra");
+        const interestLabel = compareInterestDelta <= 0 ? t("compareInterestSaving") : t("compareExtraInterest");
+        el.summaryRows.innerHTML += `
+          <div class="row"><span>${interestLabel}</span><strong style="${deltaClass}">${money(Math.abs(compareInterestDelta))}</strong></div>
+          <div class="row"><span>${totalLabel}</span><strong style="${deltaClass}">${money(Math.abs(compareTotalDelta))}</strong></div>
+        `;
+      }
+
+      renderProjection(result);
+    }
+
+    function renderProjection(result) {
+      el.projectionToggle.textContent = state.showProjection ? t("hide") : t("show");
+      el.projectionBody.classList.toggle("hidden", !state.showProjection);
+      if (!state.showProjection) return;
+
+      el.chartButton.classList.toggle("active", state.projectionView === "chart");
+      el.tableButton.classList.toggle("active", state.projectionView === "table");
+      el.projectionCanvas.classList.toggle("hidden", state.projectionView !== "chart");
+      el.scheduleWrap.classList.toggle("hidden", state.projectionView !== "table");
+
+      if (state.projectionView === "chart") drawChart(result);
+      else renderSchedule(result.schedule);
+    }
+
+    function drawChart(result) {
+      const canvas = el.projectionCanvas;
+      const ctx = canvas.getContext("2d");
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#f8faf7";
+      ctx.fillRect(0, 0, w, h);
+
+      const schedule = result.schedule;
+      if (!schedule.length) return;
+
+      const pad = 34;
+      const chartW = w - pad * 2;
+      const chartH = h - pad * 2;
+      const maxValue = Math.max(result.maxPayment * 1.1, 1);
+      const totalMonths = schedule[schedule.length - 1].month;
+      const x = (month) => pad + (month / totalMonths) * chartW;
+      const y = (value) => h - pad - (value / maxValue) * chartH;
+
+      ctx.strokeStyle = "#dde3dc";
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 4; i += 1) {
+        const gy = pad + (chartH / 4) * i;
+        ctx.beginPath();
+        ctx.moveTo(pad, gy);
+        ctx.lineTo(w - pad, gy);
+        ctx.stroke();
+      }
+
+      fillArea(schedule, (pt) => pt.principal + pt.interest, "#9dc5ff", x, y, h - pad);
+      fillArea(schedule, (pt) => pt.principal, "#73d6a3", x, y, h - pad);
+
+      ctx.fillStyle = "#667085";
+      ctx.font = "20px -apple-system, BlinkMacSystemFont, Segoe UI";
+      ctx.fillText(t("start"), pad, h - 8);
+      ctx.textAlign = "right";
+      ctx.fillText(t("endYears", { years: Math.ceil(totalMonths / 12) }), w - pad, h - 8);
+      ctx.textAlign = "left";
+    }
+
+    function fillArea(schedule, valueFn, colour, xFn, yFn, baseY) {
+      const ctx = el.projectionCanvas.getContext("2d");
+      ctx.beginPath();
+      ctx.moveTo(xFn(0), baseY);
+      schedule.forEach((pt) => ctx.lineTo(xFn(pt.month), yFn(valueFn(pt))));
+      ctx.lineTo(xFn(schedule[schedule.length - 1].month), baseY);
+      ctx.closePath();
+      ctx.fillStyle = colour;
+      ctx.fill();
+    }
+
+    function renderSchedule(schedule) {
+      el.scheduleBody.innerHTML = schedule.map((row) => `
+        <tr>
+          <td>${row.month}</td>
+          <td>${money(row.principal, 2)}</td>
+          <td>${money(row.interest, 2)}</td>
+          <td>${money(Math.max(0, row.balance), 2)}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderCapacity() {
+      const result = calculateCapacity();
+      if (!result) {
+        el.capacityResult.innerHTML = `<p class="label">${t("estimatedBorrowingPower")}</p><p class="hero-value">${money(0)}</p>`;
+        el.capacityRows.innerHTML = "";
+        return;
+      }
+
+      el.singleButton.classList.toggle("active", state.appType === "single");
+      el.coupleButton.classList.toggle("active", state.appType === "couple");
+      el.capacityResult.innerHTML = `
+        <p class="label">${t("estimatedBorrowingPower")}</p>
+        <p class="hero-value">${money(result.maxLoan)}</p>
+        <div class="hero-meta">
+          <div class="mini"><span>${t("assessmentRate")}</span><strong>${result.assessmentRateAnnual.toFixed(2)}%</strong></div>
+          <div class="mini"><span>${t("monthlySurplus")}</span><strong>${money(result.surplus, 2)}</strong></div>
+        </div>
+      `;
+      el.capacityRows.innerHTML = `
+        <div class="row"><span>${t("netMonthlyIncome")}</span><strong>${money(result.netMonthly, 2)}</strong></div>
+        <div class="row"><span>${t("estimatedLivingExpenses")}</span><strong>${money(result.expenses, 2)}</strong></div>
+        <div class="row"><span>${t("dtiLimit")}</span><strong>${money(result.dtiLimit)}</strong></div>
+        <div class="row"><span>${t("serviceabilityLimit")}</span><strong>${money(result.serviceabilityLimit)}</strong></div>
+      `;
+    }
+
+    function render() {
+      renderStaticText();
+      renderRepayment();
+      renderCapacity();
+      setActiveTabVisualOnly();
+    }
+
+    function setActiveTabVisualOnly() {
+      const tabName = state.activeTab;
+      el.repaymentTab.classList.toggle("active", tabName === "repayment");
+      el.capacityTab.classList.toggle("active", tabName === "capacity");
+      el.repaymentView.classList.toggle("hidden", tabName !== "repayment");
+      el.capacityView.classList.toggle("hidden", tabName !== "capacity");
+      el.modeBadge.textContent = tabName === "repayment" ? t("repayment") : t("capacity");
+    }
+
+    function saveAndRender() {
+      saveState();
+      render();
+    }
+
+    function bindNumber(id, key) {
+      el[id].addEventListener("input", () => {
+        state[key] = numberValue(id);
+        saveAndRender();
+      });
+    }
+
+    bindNumber("loanAmount", "loanAmount");
+    bindNumber("offsetAmount", "offsetAmount");
+    bindNumber("interestRate", "interestRate");
+    bindNumber("loanTerm", "loanTerm");
+    bindNumber("compareRate", "compareRate");
+    bindNumber("ioPeriod", "ioPeriod");
+    bindNumber("income", "income");
+    bindNumber("dependents", "dependents");
+    bindNumber("otherDebts", "otherDebts");
+
+    el.repaymentTab.addEventListener("click", () => setActiveTab("repayment"));
+    el.capacityTab.addEventListener("click", () => setActiveTab("capacity"));
+    el.langToggle.addEventListener("click", () => {
+      state.language = state.language === "zh" ? "en" : "zh";
+      saveAndRender();
+    });
+    el.compareToggle.addEventListener("click", () => {
+      state.isCompareMode = !state.isCompareMode;
+      saveAndRender();
+    });
+    el.piButton.addEventListener("click", () => {
+      state.repaymentType = "pi";
+      saveAndRender();
+    });
+    el.ioButton.addEventListener("click", () => {
+      state.repaymentType = "io";
+      saveAndRender();
+    });
+    el.singleButton.addEventListener("click", () => {
+      state.appType = "single";
+      saveAndRender();
+    });
+    el.coupleButton.addEventListener("click", () => {
+      state.appType = "couple";
+      saveAndRender();
+    });
+    el.projectionToggle.addEventListener("click", () => {
+      state.showProjection = !state.showProjection;
+      saveAndRender();
+    });
+    el.chartButton.addEventListener("click", () => {
+      state.projectionView = "chart";
+      saveAndRender();
+    });
+    el.tableButton.addEventListener("click", () => {
+      state.projectionView = "table";
+      saveAndRender();
+    });
+
+    setInputValues();
+    render();
+
+  </script>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container footer-grid">
+  <div class="footer-col"><a href="index.html" class="logo logo-white"><span class="logo-main">PWE</span><span class="logo-sub">FINANCE</span></a><p>Your local mortgage broking team.</p></div>
+  <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="about.html">About Us</a></li><li><a href="blog.html">Blog</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+  <div class="footer-col"><h4>Loans</h4><ul><li><a href="first-home-loans.html">First Home Loans</a></li><li><a href="investment-loans.html">Investment Loans</a></li><li><a href="refinancing.html">Refinancing</a></li><li><a href="commercial-business-loans.html">Commercial & Business</a></li></ul></div>
+  <div class="footer-col"><h4>Contact Us</h4><ul class="footer-contact"><li><i class="fa-solid fa-phone"></i> <a href="tel:04XX XXX XXX">04XX XXX XXX</a></li><li><i class="fa-solid fa-envelope"></i> <a href="mailto:info@pwefinance.com.au">info@pwefinance.com.au</a></li><li><i class="fa-solid fa-location-dot"></i> Melbourne VIC 3000</li></ul><div class="footer-socials"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></div></div>
+</div>
+<div class="footer-bottom"><div class="container footer-bottom-inner"><p>&copy; 2026 PWE Finance. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-and-conditions.html">Terms & Conditions</a></div></div></div>
+<div class="footer-disclaimer"><div class="container"><p>The information provided on this site is for illustrative and discussion purposes only. Normal lending criteria apply.</p></div></div>
+</footer>
+
+<a href="#" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

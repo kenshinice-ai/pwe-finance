@@ -1,0 +1,16 @@
+{
+  "name": "PWE Finance",
+  "short_name": "PWE Finance",
+  "description": "Expert Financial Solutions for Your Future — Melbourne Mortgage Brokers",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#222159",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
