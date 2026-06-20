@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kenshinice-ai.github.io/pwe-finance/sitemap.xml
