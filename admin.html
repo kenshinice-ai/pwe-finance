@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>PWE Finance Admin | Blog Publisher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { background: #f5f8fb; }
+    .admin-shell { min-height: 100vh; padding: 32px 20px; }
+    .admin-wrap { max-width: 1180px; margin: 0 auto; }
+    .admin-topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 18px;
+      margin-bottom: 24px; padding: 18px 20px; background: #fff; border: 1px solid var(--line);
+      border-radius: var(--radius-sm); box-shadow: var(--shadow-sm);
+    }
+    .admin-topbar h1 { font-size: 1.15rem; color: var(--dark); line-height: 1.3; }
+    .admin-topbar p { color: var(--muted); font-size: 0.88rem; margin-top: 4px; }
+    .admin-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr); gap: 20px; align-items: start; }
+    .admin-panel {
+      background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm); padding: 22px;
+    }
+    .admin-panel h2 { font-size: 1rem; color: var(--dark); margin-bottom: 16px; }
+    .admin-form { display: grid; gap: 16px; }
+    .admin-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .admin-field label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+    .admin-field input, .admin-field select, .admin-field textarea {
+      width: 100%; border: 1.5px solid #e0e5ec; border-radius: var(--radius-sm); padding: 11px 13px;
+      font-family: var(--font-main); font-size: 0.9rem; color: var(--dark); background: #fff;
+    }
+    .admin-field textarea { min-height: 270px; resize: vertical; line-height: 1.7; }
+    .admin-field input:focus, .admin-field select:focus, .admin-field textarea:focus {
+      outline: none; border-color: var(--light); box-shadow: 0 0 0 3px rgba(0,170,229,0.12);
+    }
+    .admin-help { color: var(--muted); font-size: 0.78rem; margin-top: 6px; line-height: 1.5; }
+    .admin-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .admin-status {
+      display: none; border-radius: var(--radius-sm); padding: 12px 14px; margin-top: 14px;
+      font-size: 0.88rem; line-height: 1.6;
+    }
+    .admin-status.info, .admin-status.success, .admin-status.error { display: block; }
+    .admin-status.info { background: rgba(0,170,229,0.1); color: #075b78; }
+    .admin-status.success { background: rgba(39,174,96,0.12); color: #17643b; }
+    .admin-status.error { background: rgba(231,76,60,0.1); color: #a93226; }
+    .login-card { max-width: 430px; margin: 12vh auto 0; }
+    .preview-card { border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; background: #fff; }
+    .preview-hero { min-height: 160px; padding: 28px; color: #fff; background: linear-gradient(135deg, #151545 0%, #222159 48%, #083f58 100%); }
+    .preview-hero h3 { font-size: 1.45rem; line-height: 1.25; margin-bottom: 10px; }
+    .preview-hero p { color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.7; }
+    .preview-body { padding: 24px; }
+    .preview-body .meta { color: var(--muted); font-size: 0.82rem; margin-bottom: 18px; }
+    .preview-body h2 { color: var(--dark); margin: 22px 0 10px; font-size: 1.25rem; }
+    .preview-body h3 { color: var(--dark); margin: 18px 0 8px; font-size: 1rem; }
+    .preview-body p, .preview-body li { color: #414760; line-height: 1.8; font-size: 0.92rem; }
+    .preview-body ul { padding-left: 20px; margin: 12px 0; }
+    .admin-hidden { display: none; }
+    @media (max-width: 900px) {
+      .admin-grid, .admin-row { grid-template-columns: 1fr; }
+      .admin-topbar { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="admin-shell">
+    <div class="admin-wrap">
+      <section class="admin-panel login-card" id="loginPanel">
+        <h1 style="font-size:1.45rem;color:var(--dark);margin-bottom:8px;">PWE Finance Admin</h1>
+        <p style="color:var(--muted);margin-bottom:20px;">Log in to publish blog posts to GitHub.</p>
+        <form class="admin-form" id="loginForm">
+          <div class="admin-field">
+            <label for="adminPassword">Admin password</label>
+            <input type="password" id="adminPassword" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn-primary btn-full" type="submit">Log In</button>
+          <div class="admin-status" id="loginStatus" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section class="admin-hidden" id="adminPanel">
+        <div class="admin-topbar">
+          <div>
+            <h1>Blog Publisher</h1>
+            <p>Create a same-style blog page, update the blog index, update sitemap, and commit to GitHub.</p>
+          </div>
+          <button class="btn btn-sm btn-secondary" id="logoutButton" type="button">Log Out</button>
+        </div>
+
+        <div class="admin-grid">
+          <section class="admin-panel">
+            <h2>Post Details</h2>
+            <form class="admin-form" id="blogForm">
+              <div class="admin-row">
+                <div class="admin-field">
+                  <label for="title">Blog title *</label>
+                  <input id="title" name="title" placeholder="Example: How to Prepare for a Refinance Review" required>
+                </div>
+                <div class="admin-field">
+                  <label for="slug">Slug *</label>
+                  <input id="slug" name="slug" placeholder="prepare-for-refinance-review" required>
+                  <div class="admin-help">The file will be blog-post-your-slug.html.</div>
+                </div>
+              </div>
+
+              <div class="admin-row">
+                <div class="admin-field">
+                  <label for="category">Category *</label>
+                  <input id="category" name="category" value="Mortgage Insights" required>
+                </div>
+                <div class="admin-field">
+                  <label for="date">Publish date *</label>
+                  <input id="date" name="date" type="date" required>
+                </div>
+              </div>
+
+              <div class="admin-field">
+                <label for="summary">Blog page summary *</label>
+                <textarea id="summary" name="summary" style="min-height:90px;" placeholder="Short summary used on blog.html cards." required></textarea>
+              </div>
+
+              <div class="admin-field">
+                <label for="heroIntro">Hero intro *</label>
+                <textarea id="heroIntro" name="heroIntro" style="min-height:90px;" placeholder="Short intro under the article H1." required></textarea>
+              </div>
+
+              <div class="admin-row">
+                <div class="admin-field">
+                  <label for="metaTitle">SEO title *</label>
+                  <input id="metaTitle" name="metaTitle" placeholder="50-60 characters is ideal" required>
+                </div>
+                <div class="admin-field">
+                  <label for="status">Status</label>
+                  <select id="status" name="status">
+                    <option value="published">Published</option>
+                    <option value="draft">Draft file only</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="admin-field">
+                <label for="metaDescription">Meta description *</label>
+                <textarea id="metaDescription" name="metaDescription" style="min-height:90px;" placeholder="140-160 characters is ideal" required></textarea>
+              </div>
+
+              <div class="admin-field">
+                <label for="content">Main content *</label>
+                <textarea id="content" name="content" required placeholder="Use blank lines between paragraphs.
+
+## Heading
+Paragraph text...
+
+### Smaller heading
+- Bullet point
+- Bullet point
+
+> Quote or callout"></textarea>
+                <div class="admin-help">Supported formatting: ## heading, ### subheading, - bullet, &gt; quote, and normal paragraphs.</div>
+              </div>
+
+              <div class="admin-actions">
+                <button class="btn btn-primary" type="submit">Publish to GitHub</button>
+                <button class="btn btn-secondary" type="button" id="previewButton">Refresh Preview</button>
+              </div>
+              <div class="admin-status" id="publishStatus" role="status" aria-live="polite"></div>
+            </form>
+          </section>
+
+          <aside class="admin-panel">
+            <h2>Preview</h2>
+            <div class="preview-card">
+              <div class="preview-hero">
+                <h3 id="previewTitle">Your blog title</h3>
+                <p id="previewIntro">Hero intro will appear here.</p>
+              </div>
+              <div class="preview-body">
+                <div class="meta" id="previewMeta">Date | Category</div>
+                <div class="content-note"><strong>Update note:</strong> Policy settings, rates and lender offers can change.</div>
+                <div id="previewContent"><p>Main content preview will appear here.</p></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const loginPanel = document.getElementById("loginPanel");
+      const adminPanel = document.getElementById("adminPanel");
+      const loginForm = document.getElementById("loginForm");
+      const blogForm = document.getElementById("blogForm");
+      const logoutButton = document.getElementById("logoutButton");
+      const previewButton = document.getElementById("previewButton");
+      const dateInput = document.getElementById("date");
+      const titleInput = document.getElementById("title");
+      const slugInput = document.getElementById("slug");
+
+      dateInput.value = new Date().toISOString().slice(0, 10);
+
+      function setStatus(elementId, message, type) {
+        const element = document.getElementById(elementId);
+        element.textContent = message || "";
+        element.className = type ? "admin-status " + type : "admin-status";
+      }
+
+      function showAdmin(isLoggedIn) {
+        loginPanel.classList.toggle("admin-hidden", isLoggedIn);
+        adminPanel.classList.toggle("admin-hidden", !isLoggedIn);
+      }
+
+      function slugify(value) {
+        return value.toLowerCase().trim().replace(/['"]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80);
+      }
+
+      function escapeHtml(value) {
+        return String(value || "").replace(/[&<>"']/g, function (char) {
+          return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char];
+        });
+      }
+
+      function contentToHtml(content) {
+        return String(content || "").split(/\n{2,}/).map(function (block) {
+          const text = block.trim();
+          if (!text) return "";
+          if (text.startsWith("### ")) return "<h3>" + escapeHtml(text.slice(4)) + "</h3>";
+          if (text.startsWith("## ")) return "<h2>" + escapeHtml(text.slice(3)) + "</h2>";
+          if (text.startsWith("> ")) return "<blockquote>" + escapeHtml(text.slice(2)) + "</blockquote>";
+          if (/^- /m.test(text)) {
+            return "<ul>" + text.split("\n").filter((line) => line.trim().startsWith("- ")).map((line) => "<li>" + escapeHtml(line.trim().slice(2)) + "</li>").join("") + "</ul>";
+          }
+          return "<p>" + escapeHtml(text).replace(/\n/g, "<br>") + "</p>";
+        }).join("");
+      }
+
+      function refreshPreview() {
+        document.getElementById("previewTitle").textContent = document.getElementById("title").value || "Your blog title";
+        document.getElementById("previewIntro").textContent = document.getElementById("heroIntro").value || "Hero intro will appear here.";
+        document.getElementById("previewMeta").textContent = [document.getElementById("date").value || "Date", document.getElementById("category").value || "Category"].join(" | ");
+        document.getElementById("previewContent").innerHTML = contentToHtml(document.getElementById("content").value) || "<p>Main content preview will appear here.</p>";
+      }
+
+      async function checkSession() {
+        try {
+          const response = await fetch("/api/session", { credentials: "same-origin" });
+          showAdmin(response.ok);
+        } catch {
+          showAdmin(false);
+        }
+      }
+
+      loginForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        setStatus("loginStatus", "Checking password...", "info");
+        const response = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          body: JSON.stringify({ password: document.getElementById("adminPassword").value }),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          setStatus("loginStatus", result.error || "Login failed.", "error");
+          return;
+        }
+        setStatus("loginStatus", "", "");
+        showAdmin(true);
+      });
+
+      logoutButton.addEventListener("click", async function () {
+        await fetch("/api/logout", { method: "POST", credentials: "same-origin" });
+        showAdmin(false);
+      });
+
+      titleInput.addEventListener("input", function () {
+        if (!slugInput.dataset.edited) slugInput.value = slugify(titleInput.value);
+        if (!document.getElementById("metaTitle").value) document.getElementById("metaTitle").value = titleInput.value + " | PWE Finance";
+        refreshPreview();
+      });
+      slugInput.addEventListener("input", function () { slugInput.dataset.edited = "true"; slugInput.value = slugify(slugInput.value); });
+      blogForm.addEventListener("input", refreshPreview);
+      previewButton.addEventListener("click", refreshPreview);
+
+      blogForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        refreshPreview();
+        setStatus("publishStatus", "Publishing to GitHub...", "info");
+        const payload = Object.fromEntries(new FormData(blogForm).entries());
+        const response = await fetch("/api/blog/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          setStatus("publishStatus", result.error || (result.errors || ["Could not publish."]).join(" "), "error");
+          return;
+        }
+        setStatus("publishStatus", "Published. GitHub commit: " + result.commit.slice(0, 8) + ". Page: " + result.url, "success");
+      });
+
+      checkSession();
+      refreshPreview();
+    })();
+  </script>
+</body>
+</html>
