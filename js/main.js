@@ -212,6 +212,45 @@
   }
 
   // ---------- Contact Form Validation (if on contact page) ----------
+  // User-facing form strings follow the page language (zh pages set
+  // <html lang="zh-CN">); everything else in this file is language-neutral.
+  var IS_ZH = (document.documentElement.lang || '').toLowerCase().indexOf('zh') === 0;
+  var FORM_MSG = IS_ZH ? {
+    firstNameRequired: '请输入名字',
+    lastNameRequired: '请输入姓氏',
+    nameMin: '姓名至少需要 2 个字符',
+    emailRequired: '请输入电子邮箱',
+    emailInvalid: '请输入有效的电子邮箱地址',
+    phoneRequired: '请输入电话号码',
+    phoneInvalid: '请输入有效的电话号码',
+    messageRequired: '请输入留言内容',
+    messageMin: '留言内容至少需要 10 个字符',
+    fixFields: '请先修正标红的字段，再提交表单。',
+    notConfigured: '表单尚未配置完成，请直接致电或发送邮件与我们联系。',
+    sendingBtn: '<i class="fa-solid fa-spinner fa-spin"></i> 正在发送…',
+    sendingStatus: '正在发送您的咨询…',
+    success: '感谢您的咨询，我们已收到您的信息，将尽快与您联系。',
+    sentBtn: '<i class="fa-solid fa-check"></i> 已发送',
+    error: '抱歉，您的咨询未能发送成功。请重试，或直接致电 / 发送邮件至 info@pwefinance.com.au。'
+  } : {
+    firstNameRequired: 'First name is required',
+    lastNameRequired: 'Last name is required',
+    nameMin: 'Name must be at least 2 characters',
+    emailRequired: 'Email is required',
+    emailInvalid: 'Please enter a valid email address',
+    phoneRequired: 'Phone number is required',
+    phoneInvalid: 'Please enter a valid phone number',
+    messageRequired: 'Message is required',
+    messageMin: 'Please enter at least 10 characters',
+    fixFields: 'Please fix the highlighted fields before submitting.',
+    notConfigured: 'This form is not configured yet. Please call or email us instead.',
+    sendingBtn: '<i class="fa-solid fa-spinner fa-spin"></i> Sending...',
+    sendingStatus: 'Sending your enquiry...',
+    success: 'Thanks, your enquiry has been sent. We will be in touch soon.',
+    sentBtn: '<i class="fa-solid fa-check"></i> Enquiry Sent',
+    error: 'Sorry, your enquiry could not be sent. Please try again, call us, or email info@pwefinance.com.au.'
+  };
+
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
@@ -227,33 +266,33 @@
 
       // First Name
       var firstName = document.getElementById('firstName');
-      if (!firstName.value.trim()) { showError(firstName, 'First name is required'); isValid = false; }
-      else if (firstName.value.trim().length < 2) { showError(firstName, 'Name must be at least 2 characters'); isValid = false; }
+      if (!firstName.value.trim()) { showError(firstName, FORM_MSG.firstNameRequired); isValid = false; }
+      else if (firstName.value.trim().length < 2) { showError(firstName, FORM_MSG.nameMin); isValid = false; }
 
       // Last Name
       var lastName = document.getElementById('lastName');
-      if (!lastName.value.trim()) { showError(lastName, 'Last name is required'); isValid = false; }
-      else if (lastName.value.trim().length < 2) { showError(lastName, 'Name must be at least 2 characters'); isValid = false; }
+      if (!lastName.value.trim()) { showError(lastName, FORM_MSG.lastNameRequired); isValid = false; }
+      else if (lastName.value.trim().length < 2) { showError(lastName, FORM_MSG.nameMin); isValid = false; }
 
       // Email
       var email = document.getElementById('email');
       var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!email.value.trim()) { showError(email, 'Email is required'); isValid = false; }
-      else if (!emailRegex.test(email.value.trim())) { showError(email, 'Please enter a valid email address'); isValid = false; }
+      if (!email.value.trim()) { showError(email, FORM_MSG.emailRequired); isValid = false; }
+      else if (!emailRegex.test(email.value.trim())) { showError(email, FORM_MSG.emailInvalid); isValid = false; }
 
       // Phone
       var phone = document.getElementById('phone');
       var phoneDigits = phone.value.replace(/\D/g, '');
-      if (!phone.value.trim()) { showError(phone, 'Phone number is required'); isValid = false; }
-      else if (phoneDigits.length < 9) { showError(phone, 'Please enter a valid phone number'); isValid = false; }
+      if (!phone.value.trim()) { showError(phone, FORM_MSG.phoneRequired); isValid = false; }
+      else if (phoneDigits.length < 9) { showError(phone, FORM_MSG.phoneInvalid); isValid = false; }
 
       // Message
       var message = document.getElementById('message');
-      if (!message.value.trim()) { showError(message, 'Message is required'); isValid = false; }
-      else if (message.value.trim().length < 10) { showError(message, 'Please enter at least 10 characters'); isValid = false; }
+      if (!message.value.trim()) { showError(message, FORM_MSG.messageRequired); isValid = false; }
+      else if (message.value.trim().length < 10) { showError(message, FORM_MSG.messageMin); isValid = false; }
 
       if (!isValid) {
-        setFormStatus(statusBox, 'Please fix the highlighted fields before submitting.', 'error');
+        setFormStatus(statusBox, FORM_MSG.fixFields, 'error');
         return;
       }
 
@@ -273,15 +312,15 @@
     function submitContactForm(form, submitBtn, originalText, statusBox) {
       var endpoint = form.getAttribute('action');
       if (!endpoint || endpoint.indexOf('formspree.io/f/') === -1) {
-        setFormStatus(statusBox, 'This form is not configured yet. Please call or email us instead.', 'error');
+        setFormStatus(statusBox, FORM_MSG.notConfigured, 'error');
         return;
       }
 
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+        submitBtn.innerHTML = FORM_MSG.sendingBtn;
       }
-      setFormStatus(statusBox, 'Sending your enquiry...', 'info');
+      setFormStatus(statusBox, FORM_MSG.sendingStatus, 'info');
 
       fetch(endpoint, {
         method: 'POST',
@@ -294,9 +333,9 @@
           }
 
           form.reset();
-          setFormStatus(statusBox, 'Thanks, your enquiry has been sent. We will be in touch soon.', 'success');
+          setFormStatus(statusBox, FORM_MSG.success, 'success');
           if (submitBtn) {
-            submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Enquiry Sent';
+            submitBtn.innerHTML = FORM_MSG.sentBtn;
             setTimeout(function () {
               submitBtn.disabled = false;
               submitBtn.innerHTML = originalText;
@@ -304,7 +343,7 @@
           }
         })
         .catch(function () {
-          setFormStatus(statusBox, 'Sorry, your enquiry could not be sent. Please try again, call us, or email info@pwefinance.com.au.', 'error');
+          setFormStatus(statusBox, FORM_MSG.error, 'error');
           if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.innerHTML = originalText;

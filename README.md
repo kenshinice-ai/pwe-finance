@@ -76,6 +76,20 @@ The site went through a UI/UX audit in July 2026. Key conventions now in place:
 
 See `HANDOFF.md` for the full audit findings, agent handoff log, and the owner TODO list.
 
+## Bilingual Site (EN / 简体中文)
+
+Every public page has a Simplified Chinese mirror under `zh/` (e.g. `zh/index.html`), linked both ways by the header 「中文 / EN」toggle and `hreflang` alternates (`en`, `zh`, `x-default`). Conventions:
+
+- zh pages set `<html lang="zh-CN">` — this alone activates the CJK font stack (Poppins + Noto Sans SC), Chinese typography overrides in `css/style.css`, and Chinese form messages in `js/main.js`.
+- Translations follow the **binding glossary and style guide** in `HANDOFF.md` §7 (e.g. Refinancing → 转贷, deposit → 首付, LMI → 贷款机构抵押保险（LMI）). Do not introduce new renderings for existing terms.
+- Any copy change on one language must be mirrored on the other; JSON-LD must mirror the visible text of its own page.
+- zh legal pages carry an "English version prevails" note — keep it.
+- The Cloudflare admin blog publisher creates EN posts only; translate new posts into `zh/` manually.
+
+## Deployment
+
+See `DEPLOYMENT.md` for the full deployment plan: architecture (GitHub Pages + Cloudflare admin), launch blockers, deploy/rollback procedure, post-deploy SEO & compliance verification, and custom-domain migration.
+
 ## Pre-Launch Checklist
 
 - Confirm all navigation links work across desktop and mobile.

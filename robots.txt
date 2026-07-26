@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 Disallow: /api/
+Disallow: /functions/
 
 Sitemap: https://kenshinice-ai.github.io/pwe-finance/sitemap.xml
