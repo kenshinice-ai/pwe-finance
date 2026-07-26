@@ -10,6 +10,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="canonical" href="https://kenshinice-ai.github.io/pwe-finance/">
+  <meta property="og:title" content="Mortgage Broker Melbourne | PWE Finance">
+  <meta property="og:description" content="PWE Finance helps Melbourne clients compare home loans, refinancing, investment loans and business finance with clear broker guidance.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kenshinice-ai.github.io/pwe-finance/">
+  <meta property="og:site_name" content="PWE Finance">
+  <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="css/style.css">
   <!-- Favicons -->
   <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
@@ -19,6 +25,7 @@
   <meta name="theme-color" content="#222159">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 
 <!-- ==================== HEADER ==================== -->
 <header class="header" id="header">
@@ -73,10 +80,12 @@
   </div>
 </header>
 
+<main id="main">
+
 <!-- ==================== HERO SECTION ==================== -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="container hero-content">
+  <div class="container hero-content" data-reveal>
     <span class="hero-label">Melbourne mortgage brokers</span>
     <h1 class="hero-title">Mortgage broker guidance for Melbourne home buyers, investors and business owners</h1>
     <p class="hero-subtitle">PWE Finance helps buyers, owners, investors and business clients compare suitable lending options, understand the trade-offs, and move through approval with less guesswork.</p>
@@ -100,9 +109,9 @@
 <!-- ==================== STATS BAR ==================== -->
 <section class="stats-bar">
   <div class="container">
-    <div class="stats-grid">
+    <div class="stats-grid" data-reveal-group>
       <div class="stat-item">
-        <div class="stat-number">90+</div>
+        <div class="stat-number" data-count-to="90" data-count-suffix="+">90+</div>
         <div class="stat-label">Lenders on Panel</div>
       </div>
       <div class="stat-item">
@@ -110,7 +119,7 @@
         <div class="stat-label">Broker Guidance</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number">7</div>
+        <div class="stat-number" data-count-to="7">7</div>
         <div class="stat-label">Loan Categories</div>
       </div>
       <div class="stat-item">
@@ -123,7 +132,7 @@
 
 <!-- ==================== INTRO SECTION ==================== -->
 <section class="intro-section">
-  <div class="container intro-grid">
+  <div class="container intro-grid" data-reveal-group>
     <div class="intro-text">
       <span class="section-label">Why PWE Finance</span>
       <h2>Borrowing decisions are easier when the numbers, risks and next steps are visible.</h2>
@@ -153,13 +162,13 @@
 <!-- ==================== QUICK SERVICES PREVIEW ==================== -->
 <section class="services-section">
   <div class="container">
-    <div class="section-header centered">
+    <div class="section-header centered" data-reveal>
       <span class="section-label">Our Services</span>
       <h2>Choose the lending path that matches your next move</h2>
       <p class="section-subtitle">Each loan type comes with different policy rules, costs and approval steps. Start with the option closest to your situation.</p>
     </div>
 
-    <div class="services-grid">
+    <div class="services-grid" data-reveal-group>
       <a href="first-home-loans.html" class="service-card">
         <div class="service-icon"><i class="fa-solid fa-house-chimney"></i></div>
         <h3>First Home Loans</h3>
@@ -197,7 +206,7 @@
       </a>
     </div>
 
-    <div style="text-align:center; margin-top:40px;">
+    <div class="section-cta">
       <a href="contact.html" class="btn btn-secondary">Get a Free Assessment</a>
     </div>
   </div>
@@ -206,12 +215,12 @@
 <!-- ==================== PROCESS SECTION ==================== -->
 <section class="process-section">
   <div class="container">
-    <div class="section-header centered">
+    <div class="section-header centered" data-reveal>
       <span class="section-label">How It Works</span>
       <h2>A cleaner process from enquiry to settlement</h2>
       <p class="section-subtitle">You get clear checkpoints, direct communication and practical next steps at each stage.</p>
     </div>
-    <div class="process-grid">
+    <div class="process-grid" data-reveal-group>
       <div class="process-card">
         <span class="process-number">01</span>
         <h3>Discovery call</h3>
@@ -239,12 +248,12 @@
 <!-- ==================== TESTIMONIALS ==================== -->
 <section class="testimonials-section">
   <div class="container">
-    <div class="section-header centered">
+    <div class="section-header centered" data-reveal>
       <span class="section-label">Client Stories</span>
       <h2>Clear guidance matters when the stakes are high</h2>
     </div>
 
-    <div class="testimonials-grid">
+    <div class="testimonials-grid" data-reveal-group>
       <div class="testimonial-card">
         <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
         <p>"The process felt organised from the first call. We knew what documents were needed, what the lender was checking, and what would happen next."</p>
@@ -270,7 +279,7 @@
 
 <section class="faq-section">
   <div class="container">
-    <div class="section-header centered">
+    <div class="section-header centered" data-reveal>
       <span class="section-label">FAQs</span>
       <h2>Common questions about working with PWE Finance</h2>
     </div>
@@ -287,6 +296,18 @@
         <button class="faq-question" type="button" aria-expanded="false">Where is PWE Finance based?<i class="fa-solid fa-chevron-down"></i></button>
         <div class="faq-answer"><p>PWE Finance is Melbourne based and supports clients looking for clear lending guidance across a range of personal and business finance needs.</p></div>
       </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">How does a mortgage broker get paid?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-answer"><p>In most cases the lender pays the broker a commission after your loan settles, which is why many broker services involve no direct cost to you. Any commission arrangements that apply to your loan are disclosed to you as part of the credit assistance process before you proceed.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">What documents do I usually need for a loan application?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-answer"><p>Most applications need identification, evidence of income such as payslips or business financials, and details of your assets, debts and living expenses. Exact requirements vary by lender and loan type, so we confirm a checklist with you before anything is submitted.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" type="button" aria-expanded="false">How long does loan approval usually take?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-answer"><p>Timeframes depend on the lender, the loan type and how complete the application is. Some approvals move within days, while others take longer if valuations or extra verification are needed. Having documents ready early usually helps the process run more smoothly.</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -300,6 +321,8 @@
     <a href="contact.html" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Contact Us Today</a>
   </div>
 </section>
+
+</main>
 
 <!-- ==================== FOOTER ==================== -->
 <footer class="footer">
@@ -361,5 +384,71 @@
 
 <a href="#" class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></a>
 <script src="js/main.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does PWE Finance help with?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PWE Finance helps clients compare home loans, refinancing, investment lending, construction loans, SMSF lending and commercial or business finance options."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does using a mortgage broker mean I only see one lender?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A broker can compare suitable options across a lender panel and explain policy differences, fees, features and likely approval requirements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is PWE Finance based?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PWE Finance is Melbourne based and supports clients looking for clear lending guidance across a range of personal and business finance needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does a mortgage broker get paid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In most cases the lender pays the broker a commission after your loan settles, which is why many broker services involve no direct cost to you. Any commission arrangements that apply to your loan are disclosed to you as part of the credit assistance process before you proceed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What documents do I usually need for a loan application?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most applications need identification, evidence of income such as payslips or business financials, and details of your assets, debts and living expenses. Exact requirements vary by lender and loan type, so we confirm a checklist with you before anything is submitted."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does loan approval usually take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Timeframes depend on the lender, the loan type and how complete the application is. Some approvals move within days, while others take longer if valuations or extra verification are needed. Having documents ready early usually helps the process run more smoothly."
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "PWE Finance",
+  "url": "https://kenshinice-ai.github.io/pwe-finance/",
+  "areaServed": "Melbourne VIC",
+  "description": "PWE Finance helps Melbourne clients compare home loans, refinancing, investment loans and business finance with clear broker guidance."
+}
+</script>
 </body>
 </html>

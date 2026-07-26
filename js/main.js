@@ -5,6 +5,14 @@
 (function () {
   'use strict';
 
+  // Signals that JS is running so the CSS scroll-reveal styles may hide
+  // elements pre-reveal. Without JS this class is absent and everything
+  // stays visible (no-JS fallback).
+  document.documentElement.classList.add('reveal-ready');
+
+  var prefersReducedMotion = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /**
    * Keeps the mobile navigation state and its accessibility attributes in sync.
    * The site is static, so interaction errors are handled visibly in the UI
@@ -71,7 +79,7 @@
   if (backToTop) {
     backToTop.addEventListener('click', function (e) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
   }
 
@@ -104,6 +112,104 @@
       answer.classList.toggle('open');
     });
   });
+
+  // ---------- Scroll Reveal ----------
+  // Elements with [data-reveal], plus the direct children of any
+  // [data-reveal-group] container (auto-staggered), fade/slide in on scroll.
+  var revealTargets = [];
+
+  document.querySelectorAll('[data-reveal]').forEach(function (el) {
+    revealTargets.push(el);
+  });
+
+  document.querySelectorAll('[data-reveal-group]').forEach(function (group) {
+    var children = group.children;
+    for (var i = 0; i < children.length; i++) {
+      children[i].style.transitionDelay = Math.min(i * 70, 420) + 'ms';
+      revealTargets.push(children[i]);
+    }
+  });
+
+  function revealEverything() {
+    revealTargets.forEach(function (el) {
+      el.style.transitionDelay = '';
+      el.classList.add('is-visible');
+    });
+  }
+
+  if (revealTargets.length) {
+    if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+      // CSS also forces visibility under reduced motion; this keeps state consistent.
+      revealEverything();
+    } else {
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      revealTargets.forEach(function (el) {
+        revealObserver.observe(el);
+      });
+    }
+  }
+
+  // ---------- Stats Count-up ----------
+  // [data-count-to="90"] (+ optional data-count-suffix="+") animates from 0
+  // when scrolled into view; reduced motion just sets the final value.
+  var countEls = document.querySelectorAll('[data-count-to]');
+
+  function setFinalCount(el) {
+    el.textContent = el.getAttribute('data-count-to') +
+      (el.getAttribute('data-count-suffix') || '');
+  }
+
+  function animateCount(el) {
+    var target = parseFloat(el.getAttribute('data-count-to'));
+    var suffix = el.getAttribute('data-count-suffix') || '';
+
+    if (isNaN(target)) {
+      setFinalCount(el);
+      return;
+    }
+
+    var duration = 800;
+    var startTime = null;
+
+    function step(timestamp) {
+      if (startTime === null) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      el.textContent = Math.round(target * eased) + suffix;
+      if (progress < 1) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
+  }
+
+  if (countEls.length) {
+    if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+      countEls.forEach(setFinalCount);
+    } else {
+      var countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            countObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.4 });
+
+      countEls.forEach(function (el) {
+        countObserver.observe(el);
+      });
+    }
+  }
 
   // ---------- Contact Form Validation (if on contact page) ----------
   var contactForm = document.getElementById('contactForm');

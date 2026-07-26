@@ -63,6 +63,19 @@ http://localhost:8000
 
 The site entry point is `index.html`.
 
+## Design System & Accessibility (2026-07 audit)
+
+The site went through a UI/UX audit in July 2026. Key conventions now in place:
+
+- **Design tokens** — brand palette and rules live in `design-system/pwe-finance/MASTER.md` (brand overrides in `HANDOFF.md` §2 take precedence). Cyan `#00AAE5` (`--brand-cyan`/`--light`) is decorative-only (dark backgrounds, gradients, borders); all text/UI on light backgrounds uses the WCAG AA–compliant `--brand-blue: #0077A8` (hover `--brand-blue-hover: #005F87`).
+- **Accessibility** — every page has a skip link + a single `<main id="main">` landmark; keyboard focus uses visible `:focus-visible` outlines; animations fully respect `prefers-reduced-motion`.
+- **Motion** — scroll-reveal via IntersectionObserver: add `data-reveal` to an element or `data-reveal-group` to a grid (children auto-stagger). Stats can count up with `data-count-to` / `data-count-suffix`. No JS or reduced motion → content simply shows.
+- **Content classes** — loan-page sections use `.content-section`, `.content-narrow`, `.info-card-grid`, `.info-card`, `.section-cta` instead of inline styles.
+- **SEO** — all public pages carry Open Graph/Twitter meta and canonical links; FAQ sections have matching `FAQPage` JSON-LD, loan pages have `BreadcrumbList`, the homepage has `FinancialService`, blog posts have `Article`.
+- **Compliance** — copy follows the guardrails in `HANDOFF.md` §4 (general information only, no outcome promises, no invented numbers). Keep new copy consistent with these.
+
+See `HANDOFF.md` for the full audit findings, agent handoff log, and the owner TODO list.
+
 ## Pre-Launch Checklist
 
 - Confirm all navigation links work across desktop and mobile.
@@ -70,8 +83,9 @@ The site entry point is `index.html`.
 - Confirm `icons/site.webmanifest` loads correctly.
 - Replace placeholder phone number `04XX XXX XXX` with the real number.
 - Replace placeholder ABN and Australian Credit Licence values before public launch.
-- Confirm the contact form behaviour is suitable for production. The current form validates client-side and shows a success state, but does not submit to a backend.
+- Confirm the contact form behaviour is suitable for production (client-side validation + Formspree submission).
 - Review blog articles for current accuracy before publishing.
+- Verify the "over 15 years" experience claim on the About page and the numeric figures kept in blog posts and loan pages (see `HANDOFF.md` §6).
 - Confirm social media links are updated from `#` placeholders if they should be active.
 
 ## Maintenance Notes
