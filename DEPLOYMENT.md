@@ -15,7 +15,7 @@ Production base URL (canonical everywhere): `https://kenshinice-ai.github.io/pwe
 
 ## 2. Launch blockers (must be fixed BEFORE public launch)
 
-These are intentionally placeholders in the repo — the site is deployable to staging as-is, but not compliant for real-customer launch until they are replaced:
+These values are placeholders on purpose. The repo deploys as-is to the public site on GitHub Pages. It is live there now with the placeholders (checked 2026-10-07). There is no separate staging environment. Do not launch to real customers until you replace every item below:
 
 1. **Phone number** — `04XX XXX XXX` appears in the header/footer/contact of every page (EN + zh). Replace display text AND `tel:` hrefs (`tel:` value must be digits only, e.g. `tel:0412345678`). Site-wide find & replace: `04XX XXX XXX`.
 2. **ABN + Australian Credit Licence** — footer line `ABN XX XXX XXX XXX | Australian Credit Licence XXXXXX` (and zh equivalent). Displaying a real ACL number is a regulatory requirement for credit assistance advertising (NCCP Act); do not launch without it.

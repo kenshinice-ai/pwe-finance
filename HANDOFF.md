@@ -1,8 +1,14 @@
 # PWE Finance — UI/UX Audit & Improvement Handoff
 
-> Status: COMPLETE — 2026-07-27 audit round (ui-ux-pro-max); verified in browser, awaiting owner review/commit
-> Branch: `claude/ui-ux-pro-max-audit-1ef23c`
+> Status (updated 2026-10-07): Both 2026-07-27 rounds are on the `main` branch. Audit round: 83a6f63. Bilingual round: 0d5445a.
+> The public site is live on GitHub Pages with placeholder phone, ABN and ACL number. Launch blockers: `DEPLOYMENT.md` §2.
+> 2026-10-07: every public page footer now carries the ABN / ACL number line. `404.html` has no footer, so it has none.
+> Branch: `main`. The audit branch `claude/ui-ux-pro-max-audit-1ef23c` is merged into it.
 > Design system reference: `design-system/pwe-finance/MASTER.md` (brand palette overrides below take precedence)
+
+## 等 Lee
+
+- **[给料] 真实的 ACL（Australian Credit Licence）号码** — 页脚仍是 XXXXXX 占位符，DEPLOYMENT.md:63 要求上线前换成真实号码 · 不给则站点不能正式上线 · 自 2026-10-07
 
 ## 1. Audit findings (baseline)
 
